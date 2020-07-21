@@ -1,0 +1,42 @@
+{
+  "name": "playwright-class",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "playwright",
+    "automate",
+    "web",
+    "browsers"
+  ],
+  "homepage": "https://github.com/bluelovers/ws-playwright/tree/master/packages/playwright-class#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-playwright/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-playwright.git"
+  },
+  "license": "ISC",
+  "author": "bluelovers",
+  "main": "lib/index.js",
+  "module": "dist/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "lint": "ynpx --quiet eslint -- **/*.ts",
+    "test": "echo \"Error: no test specified\"",
+    "test:jest": "ynpx --quiet jest -- --coverage",
+    "test:mocha": "ynpx --quiet -p ts-node -p mocha mocha -- --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\"",
+    "build": "esbuild --tsconfig=../../tsconfig.esm.json --target=es2019 --format=esm --splitting --strict --bundle --external:playwright --sourcemap=external --outdir=./dist ./lib/index.ts",
+    "preversion": "yarn run prepublishOnly && yarn run build",
+    "prepublishOnly": "yarn run test",
+    "prepublishOnly:check-bin": "ynpx --quiet @yarn-tool/check-pkg-bin",
+    "prepublishOnly:update": "yarn run ncu && yarn run sort-package-json",
+    "ncu": "yarn-tool ncu -u",
+    "sort-package-json": "yarn-tool sort"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {
+    "playwright": "*"
+  }
+}
